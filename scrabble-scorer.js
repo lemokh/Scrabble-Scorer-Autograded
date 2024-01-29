@@ -28,7 +28,7 @@ function oldScrabbleScorer(word) {
             letterPoints += `Points for '${word[i]}': ${pointValue}\n`
             // add points for that letter to wordScore
             // convert pointValue from string to number
-            score += Number(pointValue);
+            wordScore += Number(pointValue);
          }
       }
 	}
@@ -45,9 +45,8 @@ function initialPrompt() {
 };
 
 const simpleScorer = function(word) {
-   // score = 1 point per letter
-   let score = word.length;
-   return score;
+   // word score = 1 point per letter
+   return word.length;
 };
 
 const vowelBonusScorer = function(word) {
@@ -55,10 +54,10 @@ const vowelBonusScorer = function(word) {
    // each letter scores 1 point
    // each vowel scores 2 extra points
    const vowels = word.match(/[aeiou]/gi).length;
-   const score = word.length + (vowels * 2);
+   const wordScore = word.length + (vowels * 2);
    // console.log('vowels', vowels);
    // console.log('score', score);
-   return score;
+   return wordScore;
 };
 
 const scrabbleScorer = function(word) {
