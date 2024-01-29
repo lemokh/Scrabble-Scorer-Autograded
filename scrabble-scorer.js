@@ -13,7 +13,7 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-// score userInputWord & log result
+// logs points per letter & returns word score
 function oldScrabbleScorer(word) {
    word = word.toUpperCase();
 	let letterPoints = "";
@@ -24,14 +24,14 @@ function oldScrabbleScorer(word) {
       for (const pointValue in oldPointStructure) {
          // if obj key includes letter
          if (oldPointStructure[pointValue].includes(word[i])) {
-            // add this string line to letterPoints
+            // add string line to letterPoints
             letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+            // add points scored to score
             score += Number(pointValue);
          }
       }
 	}
    console.log(letterPoints);
-	// return letterPoints;
    return score;
  }
 
@@ -60,12 +60,12 @@ const vowelBonusScorer = function(word) {
    return score;
 };
 
-let scrabbleScorer = function(word) {
+const scrabbleScorer = function(word) {
 
 };
 
-// retrieve info from scoringAlgorithms:
-//    score user word via scoring object that scorerPrompt() returns
+// retrieve info from scoringAlgorithms array:
+//    score userInputWord using the scoringAlgorithm object that scorerPrompt() returns
 //    tell user their word score
 
 // contains info about each scoring option
@@ -75,11 +75,12 @@ const scoringAlgorithms = [
    {name: "Scrabble", description: "The traditional scoring algorithm.", scoringFunction: oldScrabbleScorer}
 ];
 
-/* have user select a scoring algorithm to score their word:
+/* prompt user to select a scoring algorithm for their word:
       if user enters: 0, simpleScorer()
                       1, vowelBonuScorer()
                       2, scrabbleScorer()
 */
+
 function scorerPrompt() {
    userScoringIndex = Number(input.question(
       `Which scoring algorithm would you like to use?
@@ -93,10 +94,13 @@ function scorerPrompt() {
       console.log(`Must choose # 0-2: Select again!`)
       scorerPrompt();
    } 
-   else { // chunk this to clarify parts
-      // scoringAlgorithms[userScoringIndex].scoringFunction(userInputWord);
-      console.log(`Score for ${userInputWord}: ${scoringAlgorithms[userScoringIndex].scoringFunction(userInputWord)}`);
-   }
+   // scoringAlgorithms is an array of objects
+   // userScoringIndex is the user input index # (0-2)... for selecting an object in array
+   // .scoringFunction is an object key name
+   // (userInputWord) calls .scoringFunction value with an argument userInputWord
+   console.log(`Score for ${userInputWord}: ${scoringAlgorithms[userScoringIndex].scoringFunction(userInputWord)}`);
+
+   // return the user's scoring object
    // console.log(scoringAlgorithms[userScoringIndex]);
    return scoringAlgorithms[userScoringIndex];
 }
@@ -107,8 +111,6 @@ let newPointStructure;
 
 function runProgram() {
    initialPrompt();
-   // oldScrabbleScorer(userInputWord);
-   // scrabbleScorer(userInputWord);
    scorerPrompt();
 }
 
