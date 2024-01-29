@@ -17,22 +17,23 @@ const oldPointStructure = {
 function oldScrabbleScorer(word) {
    word = word.toUpperCase();
 	let letterPoints = "";
-   let score = 0; 
+   let wordScore = 0; 
    // for each letter in word
 	for (let i = 0; i < word.length; i++) {
       // for each key in object
       for (const pointValue in oldPointStructure) {
          // if obj key includes letter
          if (oldPointStructure[pointValue].includes(word[i])) {
-            // add string line to letterPoints
+            // add string line to letterPoints string
             letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-            // add points scored to score
+            // add points for that letter to wordScore
+            // convert pointValue from string to number
             score += Number(pointValue);
          }
       }
 	}
    console.log(letterPoints);
-   return score;
+   return wordScore;
  }
 
 // complete these funcs & vars without changing their names
