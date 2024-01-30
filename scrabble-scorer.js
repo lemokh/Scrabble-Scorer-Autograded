@@ -52,25 +52,19 @@ function oldScrabbleScorer(word) {
 // returns word score using newPointStructure()
 const scrabbleScorer = function (word) {
   let wordScore = 0;
-  newPointStructure; // returns sortedKeysObj
-
-  // see how oldScrabbleScorer uses oldPointStructure
-  // LAST STEP: use sortedKeysObj to change wordScore
+  // for each letter in word
   for (let i = 0; i < word.length; i++) {
     // for each key in object
     for (let letterKey in newPointStructure) {
       // letterKey is 'a' key
       // newPointStructure[letterKey] is '#' value
-
-      // if obj key includes letter
       if (letterKey === word[i]) {
+        // convert '#' point value from string to number
         // add points for that letter to wordScore
-        // convert pointValue from string to number
-
         wordScore += Number(newPointStructure[letterKey]);
       }
     }
-    console.log("wordScore: ", wordScore);
+    console.log("wordScore increases to:", wordScore);
   }
   return wordScore;
 };
