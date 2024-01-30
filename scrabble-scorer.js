@@ -119,16 +119,18 @@ function transform(obj) { // obj is oldPointStructure
       for (let i = 0; i < obj[key].length; i++) {
          // add new key/value pair {letter: point,...} to newObj
          let newKey = obj[key][i].toLowerCase();
-         let newValue = key;
-         newObj[newKey] = newValue; // WORKS!
+         newObj[newKey] = key; // WORKS!
       }
-//////////////////////////////////////////////////////////////////////////////////
-      // use recursion?
-/////////////////////////////////////////////////////////////////////////////////
-      // newObj[keys].sort();
    }
-   console.log('newObj', newObj);
-   return newObj;
+   const sortedKeysObj = Object.keys(newObj).sort().reduce(
+      (obj, key) => { 
+         obj[key] = newObj[key]; 
+         return obj;
+      }, {}
+   );
+   console.log('sortedKeysObj =', sortedKeysObj); // WORKS!
+   return sortedKeysObj;
+   // use recursion instead?
 };
 
 
