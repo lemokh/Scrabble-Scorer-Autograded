@@ -1,9 +1,14 @@
 // inspired by (https://exercism.org/tracks/javascript/exercises/etl)
 // demonstrating Extract-Transform-Load via Scrabble's scoring system 
+
 // NOTE: do NOT change any func & var names
 
 const input = require("readline-sync");
 let userInputWord;
+
+function initialPrompt() {
+   userInputWord = input.question("Let's play some scrabble! Enter a word: ");
+};
 
 // logs points per letter & returns word score
 function oldScrabbleScorer(word) {
@@ -28,10 +33,6 @@ function oldScrabbleScorer(word) {
    return wordScore;
  }
 
-function initialPrompt() {
-   userInputWord = input.question("Let's play some scrabble! Enter a word: ");
-};
-
 const simpleScorer = function(word) {
    // word score = 1 point per letter
    return word.length;
@@ -51,8 +52,10 @@ const vowelBonusScorer = function(word) {
 // returns word score using newPointStructure()
 const scrabbleScorer = function(word) {
    let wordScore = 0;
-   newPointStructure();
+   newPointStructure; // returns sortedKeysObj
+   
    // see how oldScrabbleScorer uses oldPointStructure
+   // LAST STEP: use sortedKeysObj to change wordScore
 
    return wordScore;
 };
@@ -63,9 +66,9 @@ const scrabbleScorer = function(word) {
 
 // contains info about each scoring option
 const scoringAlgorithms = [
-   {name: "Simple Score", description: "Each letter is worth 1 point.", scoringFunction: simpleScorer},
-   {name: "Bonus Vowels	", description: "Vowels are 3 pts, consonants are 1 pt.", scoringFunction: vowelBonusScorer},
-   {name: "Scrabble", description: "The traditional scoring algorithm.", scoringFunction: scrabbleScorer}
+   {name: "Simple Score", description: "Each letter is worth 1 point.", scorerFunction: simpleScorer},
+   {name: "Bonus Vowels	", description: "Vowels are 3 pts, consonants are 1 pt.", scorerFunction: vowelBonusScorer},
+   {name: "Scrabble", description: "The traditional scoring algorithm.", scorerFunction: scrabbleScorer}
 ];
 
 /* prompt user to select a scoring algorithm for their word:
@@ -91,7 +94,7 @@ function scorerPrompt() {
    // userScoringIndex is the user input index # (0-2)... for selecting an object in array
    // .scoringFunction is an object key name
    // (userInputWord) calls .scoringFunction value with an argument userInputWord
-   console.log(`Score for ${userInputWord}: ${scoringAlgorithms[userScoringIndex].scoringFunction(userInputWord)}`);
+   console.log(`Score for ${userInputWord}: ${scoringAlgorithms[userScoringIndex].scorerFunction(userInputWord)}`);
 
    // return the user's scoring object
    // console.log(scoringAlgorithms[userScoringIndex]);
@@ -136,7 +139,6 @@ function transform(obj) { // obj is oldPointStructure
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-   // newPointStructure()
    initialPrompt();
    scorerPrompt();
 }
