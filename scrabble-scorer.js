@@ -51,12 +51,12 @@ const vowelBonusScorer = function(word) {
    return wordScore;
 };
 
-
 // uses newPointStructure to return a word score
 // compare to oldScrabbleScorer which uses oldPointStructure
 // to return a score for each letter in a word
 const scrabbleScorer = function(word) {
-   
+   // newPointStructure();
+   return score; 
 };
 
 // retrieve info from scoringAlgorithms array:
@@ -114,25 +114,26 @@ function transform(obj) { // obj is oldPointStructure
    let newObj = {};
    // obj['key'][index]
    // iterate over obj keys
-   for (const key in obj) { // TRANSFORM obj... 1: ['a',] ---> 'a': 1
+   for (const key in obj) { // 1: ['a'] ---> 'a': 1
       // iterate over each key's letter array
       for (let i = 0; i < obj[key].length; i++) {
          // add new key/value pair {letter: point,...} to newObj
          let newKey = obj[key][i].toLowerCase();
-         newObj[newKey] = key; // WORKS!
+         newObj[newKey] = Number(key); // WORKS!
       }
    }
+   // sort newObj keys 
    const sortedKeysObj = Object.keys(newObj).sort().reduce(
       (obj, key) => { 
          obj[key] = newObj[key]; 
          return obj;
       }, {}
    );
+
    console.log('sortedKeysObj =', sortedKeysObj); // WORKS!
    return sortedKeysObj;
    // use recursion instead?
 };
-
 
 let newPointStructure = transform(oldPointStructure);
 
