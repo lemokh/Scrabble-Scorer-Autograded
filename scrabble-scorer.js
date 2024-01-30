@@ -51,12 +51,13 @@ const vowelBonusScorer = function(word) {
    return wordScore;
 };
 
-// uses newPointStructure to return a word score
-// compare to oldScrabbleScorer which uses oldPointStructure
-// to return a score for each letter in a word
+// return a word score using newPointStructure()
+// see how oldScrabbleScorer uses oldPointStructure
 const scrabbleScorer = function(word) {
-   // newPointStructure();
-   return score; 
+   let wordScore = 0;
+   newPointStructure();
+   
+   return wordScore;
 };
 
 // retrieve info from scoringAlgorithms array:
@@ -138,9 +139,9 @@ function transform(obj) { // obj is oldPointStructure
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-   newPointStructure()
-   // initialPrompt();
-   // scorerPrompt();
+   // newPointStructure()
+   initialPrompt();
+   scorerPrompt();
 }
 
 // Don't write any code below this line //
