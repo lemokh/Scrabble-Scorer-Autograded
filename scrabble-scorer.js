@@ -1,8 +1,9 @@
 // inspired by (https://exercism.org/tracks/javascript/exercises/etl)
 // demonstrating Extract-Transform-Load via Scrabble's scoring system 
+// NOTE: do NOT change any func & var names
 
 const input = require("readline-sync");
-
+let userInputWord;
 
 // logs points per letter & returns word score
 function oldScrabbleScorer(word) {
@@ -27,10 +28,6 @@ function oldScrabbleScorer(word) {
    return wordScore;
  }
 
-// complete these funcs & vars without changing their names
-
-let userInputWord;
-
 function initialPrompt() {
    userInputWord = input.question("Let's play some scrabble! Enter a word: ");
 };
@@ -51,18 +48,18 @@ const vowelBonusScorer = function(word) {
    return wordScore;
 };
 
-// return a word score using newPointStructure()
-// see how oldScrabbleScorer uses oldPointStructure
+// returns word score using newPointStructure()
 const scrabbleScorer = function(word) {
    let wordScore = 0;
    newPointStructure();
-   
+   // see how oldScrabbleScorer uses oldPointStructure
+
    return wordScore;
 };
 
-// retrieve info from scoringAlgorithms array:
-//    score userInputWord using the scoringAlgorithm object that scorerPrompt() returns
-//    then tell user their word score
+// retrieves info from scoringAlgorithms array:
+//    scores userInputWord using the scoringAlgorithm object that scorerPrompt() returns
+//    then tells user their word score
 
 // contains info about each scoring option
 const scoringAlgorithms = [
@@ -144,8 +141,7 @@ function runProgram() {
    scorerPrompt();
 }
 
-// Don't write any code below this line //
-// And don't change these or your program will not run as expected //
+// Don't write any code below this line or your program won't run as expected
 module.exports = {
    initialPrompt: initialPrompt,
    transform: transform,
