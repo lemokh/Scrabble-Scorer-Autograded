@@ -114,19 +114,24 @@ function transform(obj) { // obj is oldPointStructure
    let newObj = {};
    // obj['key'][index]
    // iterate over obj keys
-   for (key in obj) { // TRANSFORM obj... 1: ['a',] ---> 'a': 1
+   for (let key in obj) { // TRANSFORM obj... 1: ['a',] ---> 'a': 1
       // iterate over each key's letter array
-      for (i=0; i<key.length; i++) {
-         // 'A'.toLowerCase()
+      // console.log('key', key);
+      // console.log('obj[key]', obj[key]);
+      for (i=0; i < obj[key].length; i++) {
+         // console.log('key[i]', key[i]);  // key[0] is 1
+         // console.log('obj[key][i]', obj[key][i]);  // obj[key][0] is 'A'
          // add new key/value pair {letter: point,...} to newObj
+         newObj[key] = obj[key][i];
+         newObj[key][i] = obj[key];
       }
 //////////////////////////////////////////////////////////////////////////////////
-      // how to do that via recursion?
+      // use recursion?
 /////////////////////////////////////////////////////////////////////////////////
-      console.log(obj[key].length); // works!
-      // newObj[keys].sort();
+      // newObj[keys].toLowerCase().sort();
    }
-   return obj;
+   console.log('newObj', newObj);
+   return newObj;
 };
 
 
@@ -134,8 +139,8 @@ let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
    newPointStructure()
-   initialPrompt();
-   scorerPrompt();
+   // initialPrompt();
+   // scorerPrompt();
 }
 
 // Don't write any code below this line //
