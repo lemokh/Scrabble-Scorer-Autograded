@@ -3,15 +3,6 @@
 
 const input = require("readline-sync");
 
-const oldPointStructure = {
-  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-  2: ['D', 'G'],
-  3: ['B', 'C', 'M', 'P'],
-  4: ['F', 'H', 'V', 'W', 'Y'],
-  5: ['K'],
-  8: ['J', 'X'],
-  10: ['Q', 'Z']
-};
 
 // logs points per letter & returns word score
 function oldScrabbleScorer(word) {
@@ -60,19 +51,23 @@ const vowelBonusScorer = function(word) {
    return wordScore;
 };
 
-const scrabbleScorer = function(word) {
 
+// uses newPointStructure to return a word score
+// compare to oldScrabbleScorer which uses oldPointStructure
+// to return a score for each letter in a word
+const scrabbleScorer = function(word) {
+   
 };
 
 // retrieve info from scoringAlgorithms array:
 //    score userInputWord using the scoringAlgorithm object that scorerPrompt() returns
-//    tell user their word score
+//    then tell user their word score
 
 // contains info about each scoring option
 const scoringAlgorithms = [
    {name: "Simple Score", description: "Each letter is worth 1 point.", scoringFunction: simpleScorer},
    {name: "Bonus Vowels	", description: "Vowels are 3 pts, consonants are 1 pt.", scoringFunction: vowelBonusScorer},
-   {name: "Scrabble", description: "The traditional scoring algorithm.", scoringFunction: oldScrabbleScorer}
+   {name: "Scrabble", description: "The traditional scoring algorithm.", scoringFunction: scrabbleScorer}
 ];
 
 /* prompt user to select a scoring algorithm for their word:
@@ -105,11 +100,40 @@ function scorerPrompt() {
    return scoringAlgorithms[userScoringIndex];
 }
 
-function transform() {};
+const oldPointStructure = {
+  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+  2: ['D', 'G'],
+  3: ['B', 'C', 'M', 'P'],
+  4: ['F', 'H', 'V', 'W', 'Y'],
+  5: ['K'],
+  8: ['J', 'X'],
+  10: ['Q', 'Z']
+};
+// returns a newObj with lowercase letter keys and point values
+function transform(obj) { // obj is oldPointStructure
+   let newObj = {};
+   // obj['key'][index]
+   // iterate over obj keys
+   for (key in obj) { // TRANSFORM obj... 1: ['a',] ---> 'a': 1
+      // iterate over each key's letter array
+      for (i=0; i<key.length; i++) {
+         // 'A'.toLowerCase()
+         // add new key/value pair {letter: point,...} to newObj
+      }
+//////////////////////////////////////////////////////////////////////////////////
+      // how to do that via recursion?
+/////////////////////////////////////////////////////////////////////////////////
+      console.log(obj[key].length); // works!
+      // newObj[keys].sort();
+   }
+   return obj;
+};
 
-let newPointStructure;
+
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
+   newPointStructure()
    initialPrompt();
    scorerPrompt();
 }
