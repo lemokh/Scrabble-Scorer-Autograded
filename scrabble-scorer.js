@@ -26,7 +26,8 @@ const vowelBonusScorer = function (word) {
   return wordScore;
 };
 
-// logs points per letter & returns word score
+// returns word score using oldPointStructure scoring object
+// logs each point total increase
 function oldScrabbleScorer(word) {
   word = word.toUpperCase();
   let letterPoints = "";
@@ -49,7 +50,8 @@ function oldScrabbleScorer(word) {
   return wordScore;
 }
 
-// returns word score using newPointStructure()
+// returns word score using newPointStructure scoring object
+// logs each point total increase
 const scrabbleScorer = function (word) {
   let wordScore = 0;
   // for each letter in word
@@ -69,11 +71,11 @@ const scrabbleScorer = function (word) {
   return wordScore;
 };
 
-// retrieves info from scoringAlgorithms array:
-//    scores userInputWord using the scoringAlgorithm object that scorerPrompt() returns
-//    then tells user their word score
+// INSTRUCTIONS:
+//    retrieve scoringFunction from the object in scoringAlgorithms array that user chooses in scorerPrompt()
+//    tell user their userInputWord score
 
-// contains info about each scoring option
+// array of objects containing each scoring option's info
 const scoringAlgorithms = [
   {
     name: "Simple Score",
@@ -92,12 +94,13 @@ const scoringAlgorithms = [
   },
 ];
 
-/* prompt user to select a scoring algorithm for their word:
+/* asks user to select a method to score their word & validates it:
       if user enters: 0, simpleScorer()
                       1, vowelBonuScorer()
                       2, scrabbleScorer()
-*/
 
+  then logs userInputWord score
+  & returns user chosen scoring object */
 function scorerPrompt() {
   userScoringIndex = Number(
     input.question(
@@ -109,25 +112,23 @@ function scorerPrompt() {
       Enter 0, 1, or 2: `
     )
   );
+  // validates user's # choice
   if (userScoringIndex > 2) {
     console.log(`Must choose # 0-2: Select again!`);
     scorerPrompt();
   }
-  // scoringAlgorithms is an array of objects
-  // userScoringIndex is the user input index # (0-2)... for selecting an object in array
-  // .scoringFunction is an object key name
-  // (userInputWord) calls .scoringFunction value with an argument userInputWord
+  // userScoringIndex is user chosen index 0-2... to select scoring object in scoringAlgoriths array of objects
   console.log(
     `Score for ${userInputWord}: ${scoringAlgorithms[
       userScoringIndex
     ].scorerFunction(userInputWord)}`
   );
-
-  // return the user's scoring object
+  // logs & returns user's scoring object
   // console.log(scoringAlgorithms[userScoringIndex]);
   return scoringAlgorithms[userScoringIndex];
 }
 
+// initial word scoring object
 const oldPointStructure = {
   1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
   2: ["D", "G"],
@@ -137,21 +138,23 @@ const oldPointStructure = {
   8: ["J", "X"],
   10: ["Q", "Z"],
 };
-// returns a newObj with lowercase letter keys and point values
+
+// transforms initial scoring object into new scoring object
+// returns new object with lowercase letter keys & point values
 function transform(obj) {
   // obj is oldPointStructure
-  let newObj = {};
-  // obj['key'][index]
-  // iterate over obj keys
+  let newObj = {}; // obj['key'][index]
+  // iterates over obj keys
   for (const key in obj) {
     // 1: ['a'] ---> 'a': 1
-    // iterate over each key's letter array
+    // iterates over each key's letter array value
     for (let i = 0; i < obj[key].length; i++) {
-      // add new key/value pair {letter: point,...} to newObj
+      // adds new key/value pair {letter: point,...} to newObj
       let newKey = obj[key][i].toLowerCase();
       newObj[newKey] = Number(key); // WORKS!
     }
   }
+
   // sort newObj keys
   const sortedKeysObj = Object.keys(newObj)
     .sort()
@@ -165,6 +168,7 @@ function transform(obj) {
   // use recursion instead?
 }
 
+// new scoring object
 let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
