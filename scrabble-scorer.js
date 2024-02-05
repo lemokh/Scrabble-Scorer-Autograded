@@ -22,7 +22,7 @@ const vowelBonusScorer = function (word) {
   const vowels = word.match(/[aeiou]/gi).length;
   const wordScore = word.length + vowels * 2;
   // console.log('vowels', vowels);
-  // console.log('score', score);
+  // console.log('wordScore', wordScore);
   return wordScore;
 };
 
@@ -100,7 +100,7 @@ const scoringAlgorithms = [
                       2, scrabbleScorer()
 
   then logs userInputWord score
-  & returns user chosen scoring object */
+  & returns user input scoring method -- as array of objects index #  */
 function scorerPrompt() {
   userScoringIndex = Number(
     input.question(
@@ -117,7 +117,8 @@ function scorerPrompt() {
     console.log(`Must choose # 0-2: Select again!`);
     scorerPrompt();
   }
-  // userScoringIndex is user chosen index 0-2... to select scoring object in scoringAlgoriths array of objects
+  // userScoringIndex is user input index 0-2...
+  // selects scoring object from scoringAlgoriths array of objects
   console.log(
     `Score for ${userInputWord}: ${scoringAlgorithms[
       userScoringIndex
@@ -144,12 +145,12 @@ const oldPointStructure = {
 function transform(obj) {
   // obj is oldPointStructure
   let newObj = {}; // obj['key'][index]
-  // iterates over obj keys
+  // iterate over obj keys
   for (const key in obj) {
     // 1: ['a'] ---> 'a': 1
-    // iterates over each key's letter array value
+    // iterate over each key's letter array value
     for (let i = 0; i < obj[key].length; i++) {
-      // adds new key/value pair {letter: point,...} to newObj
+      // add new key/value pair {letter: point,...} to newObj
       let newKey = obj[key][i].toLowerCase();
       newObj[newKey] = Number(key); // WORKS!
     }
@@ -165,7 +166,6 @@ function transform(obj) {
 
   console.log("sortedKeysObj =", sortedKeysObj); // WORKS!
   return sortedKeysObj;
-  // use recursion instead?
 }
 
 // new scoring object
